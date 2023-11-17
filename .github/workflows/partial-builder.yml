@@ -6,11 +6,6 @@ on:
       tag:
         required: true
         type: string
-    secrets:
-      DOCKERHUB_USERNAME:
-        required: true
-      DOCKERHUB_TOKEN:
-        required: true
 
 jobs:
   publish:
@@ -41,8 +36,8 @@ jobs:
         with:
           file: ./docker/Dockerfile
           context: .
-          platforms: linux/amd64,linux/arm64
+          platforms: linux/arm/v7
           push: true
-          tags: ghcr.io/${{ github.repository }}:${{ inputs.tag }}
+          tags: ghcr.io/urbancmc/mealie:${{ inputs.tag }}
           build-args: |
             COMMIT=${{ github.sha }}
