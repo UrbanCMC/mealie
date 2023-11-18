@@ -20,13 +20,16 @@ ENV PYTHONUNBUFFERED=1 \
     PIP_NO_CACHE_DIR=off \
     PIP_DISABLE_PIP_VERSION_CHECK=on \
     PIP_DEFAULT_TIMEOUT=100 \
-    POETRY_HOME="/opt/poetry" \
-    POETRY_VIRTUALENVS_IN_PROJECT=true
+    # POETRY_HOME="/opt/poetry" \
+    POETRY_HOME="/opt/pysetup" \
+    POETRY_VIRTUALENVS_IN_PROJECT=true \
+    PYSETUP_PATH="/opt/pysetup" \
+    VENV_PATH="/opt/pysetup/.venv"
 
 # prepend poetry and venv to path
-ENV PATH="$POETRY_HOME/bin:$PATH"
+ENV PATH="$POETRY_HOME/bin:$VENV_PATH/bin:$PATH"
 
-RUN curl -sSL https://install.python-poetry.org | python3 -
+# RUN curl -sSL https://install.python-poetry.org | python3 -
 # RUN poetry config virtualenvs.create false
 
 RUN apt-get update \
@@ -36,5 +39,17 @@ RUN apt-get update \
     libpq-dev \
     libwebp-dev \
     libsasl2-dev libldap2-dev libssl-dev \
-    gnupg gnupg2 gnupg1
+    gnupg gnupg2 gnupg1 \
+    # lxml dependencies
+    libxml2-dev libxslt-dev python3-dev \
+    # not strictly sure these runtime ones are needed at this stage or only later
+    libxml2 libxslt1.1 \
+    # need this for cryptography, bcrypt, and maybe Pillow
+    cargo rustc \
+    # needt his for Pillow apparently
+    libjpeg-dev zlib1g-dev \
+    # get bcrypt this way instead of via pip
+    python3-bcrypt \
+    # for pip install
+    python3-virtualenv
 #     && pip install -U --no-cache-dir pip
