@@ -29,5 +29,3 @@ jobs:
       # - backend-tests
     with:
       tag: nightly
-    secrets:
-      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

@@ -93,7 +93,7 @@ RUN . $VENV_PATH/bin/activate && pip install -r requirements.txt --only-binary=c
 # CRFPP Image
 ###############################################
 # FROM --platform=linux/arm/v7 hkotel/crfpp as crfpp
-FROM ghcr.io/urbancmc/crfpp as crfpp
+FROM ghcr.io/urbancmc/crfpp:nightly as crfpp
 
 RUN echo "crfpp-container"
 
