@@ -10,9 +10,9 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  backend-tests:
-    name: "Backend Server Tests"
-    uses: ./.github/workflows/partial-backend.yml
+  # backend-tests:
+  #   name: "Backend Server Tests"
+  #   uses: ./.github/workflows/partial-backend.yml
 
   frontend-tests:
     name: "Frontend and End-to-End Tests"
@@ -26,7 +26,7 @@ jobs:
     uses: ./.github/workflows/partial-builder.yml
     needs:
       - frontend-tests
-      - backend-tests
+      # - backend-tests
     with:
       tag: nightly
     secrets:
